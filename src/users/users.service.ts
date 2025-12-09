@@ -51,4 +51,12 @@ export class UsersService {
   async remove(id: number): Promise<void> {
     await this.usersRepository.delete(id);
   }
+
+  async login(username: string, password: string): Promise<User | null> {
+    const user = await this.usersRepository.findOneBy({ username });
+    if (user && (await bcrypt.compare(password, user.password))) {
+      return user;
+    }
+    return null;
+  }
 }

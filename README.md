@@ -23,7 +23,42 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Finance Tracker REST API - A RESTful API for personal finance management built with [NestJS](https://github.com/nestjs/nest).
+
+## API Documentation
+
+For complete endpoint documentation, see [API.md](./API.md)
+
+### Insomnia Collection
+
+Import the `insomnia_collection.json` file into Insomnia to easily test all API endpoints.
+
+**How to import:**
+1. Open Insomnia
+2. Click on "Import/Export" or "Create" → "Import From" → "File"
+3. Select the `insomnia_collection.json` file
+4. All requests will be organized and ready to use!
+
+### Available Endpoints
+
+- **Authentication**
+  - `POST /users/auth/login` - User login
+
+- **Users**
+  - `POST /users` - Create new user
+  - `GET /users` - List all users
+  - `GET /users/:id` - Get user by ID
+  - `POST /users/user?username=` - Get user by username
+  - `PUT /users/:id` - Update user password
+  - `DELETE /users/:id/delete` - Delete user
+
+## Technologies
+
+- **NestJS** - Progressive Node.js framework
+- **TypeORM** - ORM for TypeScript and JavaScript
+- **PostgreSQL** - Relational database
+- **JWT** - Token-based authentication
+- **bcrypt** - Password encryption
 
 ## Project setup
 
