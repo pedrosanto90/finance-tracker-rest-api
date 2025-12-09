@@ -47,4 +47,8 @@ export class UsersService {
     newPassword = await bcrypt.hash(newPassword, salt);
     await this.usersRepository.update(id, { password: newPassword });
   }
+
+  async remove(id: number): Promise<void> {
+    await this.usersRepository.delete(id);
+  }
 }

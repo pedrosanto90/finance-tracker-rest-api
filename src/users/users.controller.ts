@@ -1,4 +1,13 @@
-import { Controller, Post, Body, Get, Param, Query, Put } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  Query,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/createUserDto.dto';
 
@@ -51,5 +60,11 @@ export class UsersController {
     } catch (error) {
       return { message: error.message };
     }
+  }
+
+  @Delete(':id/delete')
+  async deleteUser(@Param('id') id: number) {
+    await this.usersService.remove(id);
+    return { message: 'User deleted successfully' };
   }
 }
