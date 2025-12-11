@@ -7,9 +7,12 @@ import {
   Query,
   Put,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/createUserDto.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { OwnerGuard } from '../guards/owner.guard';
 
 @Controller('users')
 export class UsersController {
@@ -28,6 +31,7 @@ export class UsersController {
     return users.map(({ password, ...user }) => user);
   }
 
+  @UseGuards(AuthGuard('jwt'), OwnerGuard)
   @Get(':id')
   async getUserById(@Param('id') id: number) {
     const user = await this.usersService.findOne(id);

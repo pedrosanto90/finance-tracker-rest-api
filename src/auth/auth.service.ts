@@ -14,13 +14,14 @@ export class AuthService {
   async signIn(username: string, password: string): Promise<LoginDto | null> {
     const user = await this.usersService.findByUsername(username);
     if (user && (await bcrypt.compare(password, user.password))) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;
-      // generate and return a token or session here
-      const payload = { username: user.username, sub: user.id };
+      const userId = Number(user.id);
+      const payload = { username: user.username, sub: userId };
       const access_token = this.jwtService.sign(payload);
       const loginData = {
         access_token,
-        userId: result.id,
+        userId: userId,
         username: result.username,
         email: result.email,
       };
