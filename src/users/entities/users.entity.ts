@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Expense } from '../../expenses/entities/expense.entity';
 
 @Entity('users')
 export class User {
@@ -14,9 +15,12 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'date', default: () => 'CURRENT_DATE' })
   createdAt: Date;
 
   @Column({ default: true })
   isActive: boolean;
+
+  @OneToMany(() => Expense, (expense) => expense.user)
+  expenses: Expense[];
 }

@@ -52,11 +52,12 @@ export class UsersController {
     return { message: 'User not found' };
   }
 
+  @UseGuards(AuthGuard('jwt'), OwnerGuard)
   @Put(':id')
   async updatePassword(
     @Param('id') id: number,
     @Body('oldPassword') oldPassword: string,
-    @Body('newPassword') newPassword: string,
+    @Body('newPassword') newPassword:string,
   ) {
     try {
       await this.usersService.updatePassword(id, oldPassword, newPassword);
@@ -66,7 +67,8 @@ export class UsersController {
     }
   }
 
-  @Delete(':id/delete')
+  @UseGuards(AuthGuard('jwt'), OwnerGuard)
+  @Delete(':id')
   async deleteUser(@Param('id') id: number) {
     await this.usersService.remove(id);
     return { message: 'User deleted successfully' };
